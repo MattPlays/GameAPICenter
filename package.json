@@ -1,6 +1,6 @@
 {
   "name": "gameapicenter",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "GameAPICenter is a centralized place with access to Game API's",
   "main": "GameAPICenter.js",
   "dependencies": {
