@@ -68,7 +68,7 @@ export class MinecraftAPI {
     UsernameToUUID(username: string): Promise<UUIDReponse>;
     UsernamesToUUIDs(usernames: string[]): Promise<UUIDReponse[]>;
     UUIDToNameHistory(uuid: string): Promise<[{name: string, changedToAt: number}]>;
-    UUIDToSkin(uuid: string, unsigned: boolean): Promise<{id: string, name: string, properties: [{name: string, value: string, signature: string}], legacy: boolean}>;
+    UUIDToSkin(uuid: string): Promise<{id: string, name: string, properties: [{name: string, value: string, signature: string}], legacy: boolean}>;
     GetBlockedServers(): Promise<string[]>;
     GetStatistics(metricKeys: "item_sold_minecraft" | "prepaid_card_redeemed_minecraft"): Promise<{total: number, last24h: number, saleVelocityPerSeconds: number}>;
     GetProfileInfo(accessToken: string): Promise<ProfileInfoResponse>;

@@ -167,9 +167,9 @@ class MinecraftAPI {
             }).then(res => res.json()).then(resolve).catch(reject)
         })
     }
-    UUIDToSkin(uuid, unsigned) {
+    UUIDToSkin(uuid) {
         return new Promise(async(resolve, reject) => {
-            let url = `${this.sessonServer}session/minecraft/profile/${uuid}?unsigned=${unsigned ?? true}`
+            let url = `${this.sessonServer}session/minecraft/profile/${uuid}`
             await fetch(url, {
                 "headers": {
                     "accept": "application/json",
@@ -293,18 +293,6 @@ class MinecraftAPI {
                 "method": "DELETE",
                 "mode": "cors",
             }).then(resolve(true)).catch(reject)
-        })
-    }
-    RedeemMinecraftAccount(code, accessToken) {
-        return new Promise(async(resolve, reject) => {
-            let url = this.apiServices + `productcoucher/${code}`;
-            await fetch(url, {
-                "headers": {
-                    "Authorization": `Bearer ${accessToken}`
-                },
-                "method": "GET",
-                "mode": "cors",
-            }).then((r) => r.json()).then(resolve).catch(reject)
         })
     }
 }
