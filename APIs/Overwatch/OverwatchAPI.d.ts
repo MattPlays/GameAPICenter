@@ -1,6 +1,6 @@
 export type OverwatchPlatform = "pc" | "xbox" | "ps4" | "nintendo-switch";
 export type OverwatchRegion = "us" | "eu" | "asia";
-export type OverwatchHeros = 'ana' | 'ashe' | 'baptiste' | 'bastion' | 'brigitte' | 'doomfist' | 'dva' | 'echo' | 'genji' | 'hammond' | 'hanzo' | 'junkrat' | 'lucio' | 'mccree' | 'mei' | 'mercy' | 'moira' | 'orisa' | 'pharah' | 'reaper' | 'reinhardt' | 'roadhog' | 'sigma' | 'soldier' | 'sombra' | 'symmetra' | 'torbjorn' | 'tracer' | 'widowmaker' | 'winston' | 'zarya' | 'zenyatta';
+export type OverwatchHeros = ['ana' , 'ashe' , 'baptiste' , 'bastion' , 'brigitte' , 'doomfist' , 'dva' , 'echo' , 'genji' , 'hammond' , 'hanzo' , 'junkrat' , 'lucio' , 'mccree' , 'mei' , 'mercy' , 'moira' , 'orisa' , 'pharah' , 'reaper' , 'reinhardt' , 'roadhog' , 'sigma' , 'soldier' , 'sombra' , 'symmetra' , 'torbjorn' , 'tracer' , 'widowmaker' , 'winston' , 'zarya' , 'zenyatta'];
 export type OverwatchProfile = {
     competitiveStats: {
         awards: {
@@ -10,7 +10,10 @@ export type OverwatchProfile = {
             medalsSilver: number,
             medalsGold: number
         },
-        games: {played: number, won: number},
+        games: {
+            played: number, 
+            won: number
+        },
     },
     endorsment: number,
     endorsementIcon: string,
@@ -34,7 +37,13 @@ export type OverwatchProfile = {
     },
     rating: number,
     ratingIcon: string,
-    ratings: [{level: number, role: string, roleIcon: string},];
+    ratings: [
+        {
+            level: number, 
+            role: string, 
+            roleIcon: string
+        },
+    ];
 }
 export class OverwatchAPI {
     constructor();

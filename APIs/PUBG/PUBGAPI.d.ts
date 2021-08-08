@@ -699,6 +699,6 @@ export class PUBGAPI {
     GetGameModeLeaderboard(platform: string, region: string, seasonId: string, gameMode: string): Promise<PUBGGameModeLeaderboard>;
     GetTournaments(): Promise<PUBGTournamentsResponse>;
     GetTournamentById(tournamentId: string): Promise<PUBGTournamentStats>;
-    GetSampleMatches(platform: string): Promsie<PUBGSampleMatchesResponse>;
+    GetSampleMatches(platform: string): Promise<PUBGSampleMatchesResponse>;
     GetAPIStatus(): Promise<PUBGAPIStatusResponse>;
 }

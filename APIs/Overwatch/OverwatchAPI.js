@@ -24,7 +24,7 @@ class OverwatchAPI {
     }
     GetHeroStats(platform, region, battletag, heros) {
         return new Promise(async(resolve, reject) => {
-            let url = this.api + `${platform}/${region}/${battletag.replace("#", "-")}/heros/${heros.join()}`
+            let url = this.api + `${platform}/${region}/${battletag.replace("#", "-")}/heroes/${heros.join()}`
             await fetch(url, {
                 "method": "GET",
                 "mode": "cors"
