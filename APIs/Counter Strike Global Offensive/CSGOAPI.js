@@ -18,9 +18,9 @@ class CSGOAPI {
             }).then(res => res.json()).then(resolve).catch(reject)
         })
     }
-    GetStatsSegement(platformIdentifer, segmentType) {
+    GetStatSegement(playerIndentifer, segmentType) {
         return new Promise(async(resolve, reject) => {
-            let url = this.api + `profile/steam/${platformIdentifer}/segments/${segmentType}`
+            let url = this.api + `profile/steam/${playerIndentifer}/segments/${segmentType}`
             await fetch(url, {
                 "headers": {
                     "TRN-Api-Key": this.authKey,

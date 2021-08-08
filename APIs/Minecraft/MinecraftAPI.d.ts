@@ -57,15 +57,11 @@ export type ChangeNameError = {
     errorMessage: string,
     developerMessage: string;
 }
-export type SecurityQuestionsResponse = {
-    answer: {id: number},
-    question: {id: number, question: string};
-}
 export class MinecraftAPI {
     constructor();
     GetAPIStatus(): Promise<ServerStatusResponse>;
     Authenticate(username: string, password: string): Promise<AuthenticationResponse>;
-    Refresh(accessToken: string, clientToken: string): Promise<RefreshResponse>;
+    Refresh(accessToken: string, clientToken: string, profileIdentifier: string, playerName: string): Promise<RefreshResponse>;
     Validate(accessToken: string, clientToken: string): Promise<any>;
     Signout(username: string, password: string): Promise<any>;
     Invalidate(accessToken: string, clientToken: string): Promise<any>;
@@ -81,8 +77,5 @@ export class MinecraftAPI {
     ChangeName(newName: string, accessToken: string): Promise<ProfileInfoResponse> | Promise<ChangeNameError>;
     ChangeSkin(variant: "classic" | "slim", url: string, accessToken: string): Promise<any>;
     ResetSkin(accessToken: string, uuid: string): Promise<any>;
-    VerifySecurityLocation(accessToken: string): Promise<any>;
-    GetSecurityQuestions(accessToken: string): Promise<SecurityQuestionsResponse[]>;
-    SendSecurityQuestions(questions: [{id: number, answer: string}], accessToken: string): Promise<any>;
     RedeemMinecraftAccount(code: string, accessToken: string): Promise<{voucherInfo: {code: string, productVariant: string, status: string}, productRedeemable: boolean}>;
 }

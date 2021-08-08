@@ -30,7 +30,7 @@ export type Stat = {
     displayName: string;
     displayCategory: string;
     category: string;
-    metadata: Array;
+    metadata: [];
     value: number;
     displayValue: string;
     displayType: string;
@@ -99,11 +99,12 @@ export type Profile = {
             }
         },
         segments: Segment[],
-        availableSegments: Array,
+        availableSegments: [],
         expiryDate: string,
     }
 }
+export type platform = "uplay" | "psn" | "xbl"
 export class HyperScapeAPI {
     constructor(authKey: string);
-    GetPlayerProfile(platform: string, platformIdentifier: string): Promise<Profile>;
+    GetPlayerProfile(platform: platform, platformIdentifier: string): Promise<Profile>;
 }

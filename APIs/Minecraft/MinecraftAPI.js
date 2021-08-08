@@ -44,12 +44,16 @@ class MinecraftAPI {
         }).then(res => res.json()).then(resolve).catch(reject);
         })
     }
-    Refresh(accessToken, clientToken) {
+    Refresh(accessToken, clientToken, profileIdentifier, playerName) {
         return new Promise(async(resolve, reject) => {
             let url = this.authServer + "refresh";
             let payload = {
                 "accessToken": accessToken,
-                "clientToken": clientToken
+                "clientToken": clientToken,
+                "selectedProfile": {
+                    "id": profileIdentifier,
+                    "name": playerName
+                }
             }
             await fetch(url, {
                 "headers": {
@@ -288,48 +292,6 @@ class MinecraftAPI {
                 },
                 "method": "DELETE",
                 "mode": "cors",
-            }).then(resolve(true)).catch(reject)
-        })
-    }
-    VerifySecurityLocation(accessToken) {
-        return new Promise(async(resolve, reject) => {
-            let url = this.api + `user/security/location`
-            await fetch(url, {
-                "headers": {          
-                    "accept-language": "en-US, en;q=0.9",
-                    "Authorization": `Bearer ${accessToken}`
-                },
-                "method": "GET",
-                "mode": "cors",
-            }).then(resolve(true)).catch(reject)
-        })
-    }
-    GetSecurityQuestions(accessToken) {
-        return new Promise(async(resolve, reject) => {
-            let url = this.api + `user/security/challanges`
-            await fetch(url, {
-                "headers": {          
-                    "accept-language": "en-US, en;q=0.9",
-                    "Authorization": `Bearer ${accessToken}`
-                },
-                "method": "GET",
-                "mode": "cors",
-            }).then(res => res.json()).then(resolve).catch(reject)
-        })
-    }
-    SendSecurityQuestions(questions, accessToken) {
-        return new Promise(async(resolve, reject) => {
-            let url = this.api + `user/security/location`
-            let payload = questions
-            await fetch(url, {
-                "headers": {          
-                    "accept-language": "en-US, en;q=0.9",
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${accessToken}`
-                },
-                "method": "POST",
-                "mode": "cors",
-                "body": JSON.stringify(payload),
             }).then(resolve(true)).catch(reject)
         })
     }
