@@ -1,5 +1,5 @@
 export type Stat = {
-    rank: string | null,
+    rank: string,
     percentile: number,
     displayName: string,
     displayCategory: string,
@@ -17,20 +17,20 @@ export type Profile = {
             platformUserHandle: string,
             platformUserIdentifier: string,
             avatarUrl: string,
-            additionalParameters: string[] | null,
+            additionalParameters: string[],
         },
         userInfo: {
-            userId: number | null,
+            userId: number,
             isPremium: boolean,
             isVerified: boolean,
             isInfluencer: boolean,
             isPartner: boolean,
-            countryCode: string | null,
-            customAvatarUrl: string | null,
-            customHeroUrl: string | null,
-            socialAccounts: string[] | null,
-            oageviews: null,
-            isSuspicious: boolean | null,
+            countryCode: string,
+            customAvatarUrl: string,
+            customHeroUrl: string,
+            socialAccounts: string[],
+            pageviews: number,
+            isSuspicious: boolean,
         },
         metadata: {},
         segments: [
@@ -94,18 +94,14 @@ export type SegmentResponse = {
     },
 }
 export type SearchResult = {
-    data: [
-        {
-            platformId: number,
-            platformSlug: string,
-            platformUserIdentifier: string,
-            platformUserId: string,
-            platformUserHandle: string,
-            avatarUrl: string,
-            status: string | null,
-            additionalParameters: string[] | null,
-        }
-    ]
+    platformId: number,
+    platformSlug: string,
+    platformUserIdentifier: string,
+    platformUserId: string,
+    platformUserHandle: string,
+    avatarUrl: string,
+    status: string,
+    additionalParameters: string[],
 }
 export class CSGOAPI {
     constructor(authKey: string);

@@ -4,10 +4,8 @@
   "description": "GameAPICenter is a centralized place with access to Game API's",
   "main": "GameAPICenter.js",
   "dependencies": {
-    "fs": "^0.0.1-security",
     "node-fetch": "^2.6.1"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

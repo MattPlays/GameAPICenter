@@ -37,6 +37,14 @@ export type Player = {
             rankImg: string,
             rankedSeason: string
         },
+        arena: {
+            rankScore: number,
+            rankName: string,
+            rankDiv: number,
+            ladderPosPosition: number,
+            rankImg: string,
+            rankedSeason: string
+        }
         battlepass: {
             level: string,
             history: {
@@ -123,22 +131,8 @@ export type Player = {
         clusterSrv: string
     },
     total: {
-        kills: {name: string, value: number},
-        wins_season_3: {name: string, value: number},
-        wins_season_4: {name: string, value: number},
-        games_played: {name: string, value: number},
-        wins_season_1: {name: string, value: number},
-        creeping_barrage_damage: {name: string, value: number},
-        kills_season_1: {name: string, value: number},
-        wins_season_2: {name: string, value: number},
-        top_3: {name: string, value: number},
-        beast_of_the_hunt_kills: {name: string, value: number},
-        damage: {name: string, value: number},
-        dropped_items_for_squadmates: {name: string, value: number},
-        pistol_kills: {name: string, value: number},
-        beacons_scanned: {name: string, value: number},
-        ar_kills: {name: string, value: number},
-        kd: {name: string, value: number},
+        // Unpredictable
+        // Would need a player who has done X of everything
     }
 }
 export type MapRotation = {
@@ -273,7 +267,10 @@ export type ServerStatusResponse = {
             'Playstation-API': ServerStatus,
             'Xbox-API': ServerStatus
         },
-        otherPlatforms: {'Playstaion-Network': ServerStatus, 'Xbox-Live': ServerStatus}
+        otherPlatforms: {
+            'Playstation-Network': ServerStatus, 
+            'Xbox-Live': ServerStatus
+        }
     }
 }
 export type NameToUIDResponse = {

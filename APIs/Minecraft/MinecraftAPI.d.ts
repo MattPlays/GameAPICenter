@@ -30,7 +30,7 @@ export type RefreshResponse = {
     accessToken: string,
     clientToken: string,
     selectedProfile: {id: string, name: string},
-    user: {id: string, properties: [{name: string, value: string}, {name: string, value: string}]}
+    user: {id: string, properties: {name: string, value: string}[]}
 }
 export type UUIDReponse = {
     name: string,
@@ -45,8 +45,8 @@ export type ProfileInfoResponse = {
     capes: [];
 }
 export type ProfileNameChangeInfoResponse = {
-    changedAt: Date,
-    createdAt: Date,
+    changedAt: string,
+    createdAt: string,
     nameChangeAllowed: boolean;
 }
 export type ChangeNameError = {
@@ -67,8 +67,8 @@ export class MinecraftAPI {
     Invalidate(accessToken: string, clientToken: string): Promise<any>;
     UsernameToUUID(username: string): Promise<UUIDReponse>;
     UsernamesToUUIDs(usernames: string[]): Promise<UUIDReponse[]>;
-    UUIDToNameHistory(uuid: string): Promise<[{name: string, changedToAt: number}]>;
-    UUIDToSkin(uuid: string): Promise<{id: string, name: string, properties: [{name: string, value: string, signature: string}], legacy: boolean}>;
+    UUIDToNameHistory(uuid: string): Promise<{name: string, changedToAt: number}[]>;
+    UUIDToSkin(uuid: string): Promise<{id: string, name: string, properties: {name: string, value: string, signature: string}[], legacy: boolean}>;
     GetBlockedServers(): Promise<string[]>;
     GetStatistics(metricKeys: "item_sold_minecraft" | "prepaid_card_redeemed_minecraft"): Promise<{total: number, last24h: number, saleVelocityPerSeconds: number}>;
     GetProfileInfo(accessToken: string): Promise<ProfileInfoResponse>;
@@ -77,5 +77,4 @@ export class MinecraftAPI {
     ChangeName(newName: string, accessToken: string): Promise<ProfileInfoResponse> | Promise<ChangeNameError>;
     ChangeSkin(variant: "classic" | "slim", url: string, accessToken: string): Promise<any>;
     ResetSkin(accessToken: string, uuid: string): Promise<any>;
-    RedeemMinecraftAccount(code: string, accessToken: string): Promise<{voucherInfo: {code: string, productVariant: string, status: string}, productRedeemable: boolean}>;
 }

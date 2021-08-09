@@ -612,9 +612,12 @@ BloonsTD6API.GetAllTowers().then((data) => {
 #### GetTowerByID <a id="bloonstd6-gettowerbyid">
 Get a specific tower in BTD6.
 ##### Input <a id="bloonstd6-gettowerbyid-input">
+```typescript
+export type TowerID = "dart-monkey" | "boomerang-monkey" | "bomb-shooter" | "tack-shooter" | "ice-monkey" | "glue-gunner" | "sniper-monkey" | "monkey-sub" | "monkey-buccaneer" | "monkey-ace" | "heli-pilot" | "mortar-monkey" | "dartling-gunner" | "wizard-monkey" | "super-monkey" | "ninja-monkey" | "alchemist" | "druid" | "banana-farm" | "spike-factory" | "monkey-village" | "engineer-monkey";
+```
 | Input  | Type | Required | Description |  
 | ------------- | ------------- | ------------- | ------------- |
-| towerID  |`string`  | Yes | a Tower ID ie. 'dart-monkey', 'super-monkey' |
+| towerID  |`TowerID`  | Yes | a Tower ID ie. 'dart-monkey', 'super-monkey' |
 ##### Output <a id="bloonstd6-gettowerbyid-output">
 The GetTowerByID function returns a `Promise<Tower>` type
 ##### Usage <a id="bloonstd6-gettowerbyid-usage">
@@ -638,9 +641,12 @@ BloonsTD6API.GetAllHeros().then((data) => {
 #### GetHeroByID <a id="bloonstd6-getherobyid">
 Get a specific Hero in BTD6.
 ##### Input <a id="bloonstd6-getherobyid-input">
+```typescript
+export type HeroID = "quincy" | "gwendolin" | "striker-jones" | "captain-churchill" | "benjamin" | "ezili" | "pat-fusty" | "adora" | "admiral-brickell" | "etienne" | "sauda";
+```
 | Input  | Type | Required | Description |  
 | ------------- | ------------- | ------------- | ------------- |
-| heroID  |`string`  | Yes | a Hero ID ie. 'quincy' |
+| heroID  |`HeroID`  | Yes | a Hero ID ie. 'quincy' |
 ##### Output <a id="bloonstd6-getherobyid-output">
 The GetHeroByID function returns a `Promise<Hero>` type
 ##### Usage <a id="bloonstd6-getherobyid-usage">
@@ -664,9 +670,12 @@ BloonsTD6API.GetAllBloons().then((data) => {
 #### GetBloonByID <a id="bloonstd6-getbloonbyid">
 Get a specific Bloon in BTD6.
 ##### Input <a id="bloonstd6-getbloonbyid-input">
+```typescript
+export type BloonID = "red" | "blue" | "green" | "pink" | "black" | "white" | "purple" | "lead" | "zebra" | "rainbow" | "ceramic" | "golden" | "ghost" | "moab" | "bfb" | "zomg" | "bad" | "ddt"
+```
 | Input  | Type | Required | Description |  
 | ------------- | ------------- | ------------- | ------------- |
-| bloonID  |`string`  | Yes | a Bloon ID ie. 'red', 'blue' |
+| bloonID  |`BloonID`  | Yes | a Bloon ID ie. 'red', 'blue' |
 ##### Output <a id="bloonstd6-getbloonbyid-output">
 The GetBloonByID function returns a `Promise<Bloon>` type
 ##### Usage <a id="bloonstd6-getbloonbyid-usage">
@@ -1549,8 +1558,8 @@ export type ProfileInfoResponse = {
 #### ProfileNameChangeInfoResponse <a id="minecraft-returntypes-profilenamechangeinforesponse">
 ```typescript
 export type ProfileNameChangeInfoResponse = {
-    changedAt: Date,
-    createdAt: Date,
+    changedAt: string,
+    createdAt: string,
     nameChangeAllowed: boolean;
 }
 ```

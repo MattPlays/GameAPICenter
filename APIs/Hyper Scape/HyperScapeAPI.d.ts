@@ -1,10 +1,10 @@
 export type platformInfo = {
     platformSlug: string,
-    platformUserId: string | null,
+    platformUserId: string,
     platformUserHandle: string,
     platformUserIdentifier: string,
     avatarUrl: string,
-    additionalParameters: string[] | null;
+    additionalParameters: string[];
 }
 export type SocialAccount = {
     platformSlug: string,
@@ -19,13 +19,13 @@ export type userInfo = {
     isPartner: boolean,
     countryCode: string
     customAvatarUrl: string,
-    customHeroUrl: string | null,
+    customHeroUrl: string,
     socialAccounts: SocialAccount[],
-    pageviews: null,
-    isSuspicious: boolean | null;
+    pageviews: number,
+    isSuspicious: boolean;
 }
 export type Stat = {
-    rank: string | null;
+    rank: string;
     percentile: number;
     displayName: string;
     displayCategory: string;
@@ -98,10 +98,10 @@ export type Profile = {
                 displayValue: string
             }
         },
-        segments: Segment[],
-        availableSegments: [],
-        expiryDate: string,
-    }
+    },
+    segments: Segment[],
+    availableSegments: [],
+    expiryDate: string,
 }
 export type platform = "uplay" | "psn" | "xbl"
 export class HyperScapeAPI {

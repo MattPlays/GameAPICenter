@@ -1,5 +1,95 @@
 const fetch = require('node-fetch');
-const fs = require("fs");
+class ServerStatusResponse {
+    constructor(data) {
+        this["minecraft.net"] = data["minecraft.net"];
+        this["session.minecraft.net"] = data["session.minecraft.net"];
+        this["account.mojang.com"] = data["account.mojang.com"];
+        this["authserver.mojang.com"] = data["authserver.mojang.com"];
+        this["api.mojang.com"] = data["api.mojang.com"];
+        this["textures.minecraft.net"] = data["textures.minecraft.net"];
+        this["mojang.com"] = data["mojang.com"];
+    };
+};
+class AuthenticationProperty {
+    constructor(name, value) {
+        this.name = name;
+        this.value = value;
+    };
+};
+class AuthenticationProfile {
+    constructor(name, id) {
+        this.name = name;
+        this.id = id;
+    };
+};
+class AuththenticationResponse {
+    constructor(user, clientToken, accessToken, availableProfiles, selectedProfile) {
+        this.user = {
+            username: user.username ?? "",
+            properties: [],
+            id: user.id ?? "",
+        };
+        user.properties.forEach((d) => {
+            this.user.properties.push(new AuthenticationProperty(d.name, d.value));
+        });
+        this.clientToken = clientToken;
+        this.accessToken = accessToken;
+        this.availableProfiles = [];
+        availableProfiles.forEach((profile) => {
+            this.availableProfiles.push(new AuthenticationProfile(profile.name, profile.id));
+        });
+        this.selectedProfile = new AuthenticationProfile(selectedProfile.name, selectedProfile.id);
+    };
+};
+class RefreshResponse {
+    constructor(accessToken, clientToken, selectedProfile, user) {
+        this.accessToken = accessToken;
+        this.clientToken = clientToken;
+        this.selectedProfile = {
+            id: selectedProfile.id ?? "",
+            name: selectedProfile.name ?? "",
+        };
+        this.user = {
+            id: user.id,
+            properties = [],
+        }
+        user.properties.forEach((prop) => {
+            this.user.properties.push({
+                name: prop.name ?? "",
+                value: prop.value ?? ""
+            })
+        })
+    }
+}
+class UUIDResponse {
+    constructor(name, id) {
+        this.name = name;
+        this.id = id;
+    };
+};
+class ProfileInfoResponse {
+    constructor(id, name, skins, capes) {
+        this.id = id;
+        this.name = name;
+        this.skins = [];
+        skins.forEach((skin) => {
+            this.skins.push({
+                id: skin.id,
+                state: skin.state,
+                url: skin.url,
+                variant: skin.variant,
+            });
+        });
+        this.capes = capes ?? [];
+    }
+}
+class ProfileNameChangeInfoResponse {
+    constructor(changedAt, createdAt, nameChangeAllowed) {
+        this.changedAt = changedAt;
+        this.createdAt = createdAt;
+        this.nameChangeAllowed = nameChangeAllowed
+    }
+}
 class MinecraftAPI {
     constructor() {
         this.api = "https://api.mojang.com/";
@@ -18,7 +108,9 @@ class MinecraftAPI {
                 },
                 "method": "GET",
                 "mode": "cors"
-            }).then(res => res.json()).then(resolve).catch(reject);
+            }).then(res => res.json()).then((data) => {
+                resolve(new ServerStatusResponse(data));
+            }).catch(reject);
         })
     }
     Authenticate(username, password) {
@@ -41,7 +133,9 @@ class MinecraftAPI {
                 "method": "POST",
                 "mode": "cors",
                 "body": JSON.stringify(payload)
-        }).then(res => res.json()).then(resolve).catch(reject);
+        }).then(res => res.json()).then((data) => {
+            resolve(new AuththenticationResponse(data.user, data.clientToken, data.accessToken, data.availableProfiles, data.selectedProfile));
+        }).catch(reject);
         })
     }
     Refresh(accessToken, clientToken, profileIdentifier, playerName) {
@@ -64,7 +158,9 @@ class MinecraftAPI {
                 "method": "POST",
                 "mode": "cors",
                 "body": JSON.stringify(payload)
-        }).then(res => res.json()).then(resolve).catch(reject);
+        }).then(res => res.json()).then((data) => {
+            resolve(new RefreshResponse(data.accessToken, data.clientToken, data.selectedProfile, data.user));
+        }).catch(reject);
         })
     }
     Validate(accessToken, clientToken) {
@@ -134,7 +230,9 @@ class MinecraftAPI {
                 },
                 "method": "GET",
                 "mode": "cors"
-            }).then(res => res.json()).then(resolve).catch(reject);
+            }).then(res => res.json()).then((data) => {
+                resolve(new UUIDResponse(data.name, data.id));
+            }).catch(reject);
         });
     }
     UsernamesToUUIDs(usernames) { 
@@ -150,7 +248,13 @@ class MinecraftAPI {
                 "method": "POST",
                 "mode": "cors",
                 "body": JSON.stringify(payload)
-        }).then(res => res.json()).then(resolve).catch(reject);
+        }).then(res => res.json()).then((data) => {
+            let Responses = [];
+            data.forEach((d) => {
+                Response.push(new UUIDResponse(d.name, d.id));
+            });
+            resolve(Responses);
+        }).catch(reject);
     })
     }
     UUIDToNameHistory(uuid) {
@@ -164,7 +268,16 @@ class MinecraftAPI {
                 },
                 "method": "GET",
                 "mode": "cors"
-            }).then(res => res.json()).then(resolve).catch(reject)
+            }).then(res => res.json()).then((data) => {
+                let NameHistory = [];
+                data.forEach((d) => {
+                    NameHistory.push({
+                        name: d.name ?? "",
+                        changedToAt: d.changedToAt ?? 0
+                    });
+                });
+                resolve(NameHistory);
+            }).catch(reject)
         })
     }
     UUIDToSkin(uuid) {
@@ -178,7 +291,14 @@ class MinecraftAPI {
                 },
                 "method": "GET",
                 "mode": "cors"
-            }).then(res => res.json()).then(resolve).catch(reject)
+            }).then(res => res.json()).then((data) => {
+                resolve({
+                    id: data.id ?? "",
+                    name: data.name ?? "",
+                    properties: data.properties ?? [],
+                    legacy: data.legacy ?? false
+                })
+            }).catch(reject)
         })
     }
     GetBlockedServers() {
@@ -208,7 +328,13 @@ class MinecraftAPI {
                 "method": "POST",
                 "mode": "cors",
                 "body": JSON.stringify(payload)
-            }).then(res => res.json()).then(resolve).catch(reject)
+            }).then(res => res.json()).then((data) => {
+                resolve({
+                    total: data.total ?? 0,
+                    last24h: data.last24h ?? 0,
+                    saleVelocityPerSeconds: data.saleVelocityPerSeconds ?? 0,
+                });
+            }).catch(reject)
         })
     }
     GetProfileInfo(accessToken) {
@@ -221,7 +347,9 @@ class MinecraftAPI {
                 },
                 "method": "GET",
                 "mode": "cors"
-            }).then(res => res.json()).then(resolve).catch(reject)
+            }).then(res => res.json()).then((data) => {
+                resolve(new ProfileInfoResponse(data.id, data.name, data.skins, data.capes));
+            }).catch(reject)
         })
     }
     GetProfileNameChangeInfo(accessToken) {
@@ -234,7 +362,9 @@ class MinecraftAPI {
                 },
                 "method": "GET",
                 "mode": "cors"
-            }).then(res => res.json()).then(resolve).catch(reject)
+            }).then(res => res.json()).then((data) => {
+                resolve(new ProfileNameChangeInfoResponse(data.changedAt, data.createdAt, data.nameChangeAllowed));
+            }).catch(reject)
         })
     }
     CheckNameAvailability(name, accessToken) {
@@ -247,7 +377,11 @@ class MinecraftAPI {
                 },
                 "method": "GET",
                 "mode": "cors"
-            }).then(res => res.json()).then(resolve).catch(reject)
+            }).then(res => res.json()).then((data) => {
+                resolve({
+                    status: data.status ?? ("DUPLICATE" | "AVAILABLE"),
+                });
+            }).catch(reject)
         })
     }
     ChangeName(newName, accessToken) {
@@ -260,7 +394,9 @@ class MinecraftAPI {
                 },
                 "method": "PUT",
                 "mode": "cors"
-            }).then(res => res.json()).then(resolve).catch(reject)
+            }).then(res => res.json()).then((data) => {
+                resolve(new ProfileInfoResponse(data.id, data.name, data.skins, data.capes));
+            }).catch(reject)
         })
     }
     ChangeSkin(variant, skinUrl, accessToken) {
