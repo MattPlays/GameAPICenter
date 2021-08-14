@@ -4,6 +4,12 @@
   "description": "GameAPICenter is a centralized place with access to Game API's",
   "main": "GameAPICenter.js",
   "dependencies": {
+    "@mattplays/apexlegends-api": "^0.0.1",
+    "@mattplays/bloonstd6-api": "^0.0.2",
+    "@mattplays/csgo-api": "^0.0.2",
+    "@mattplays/hyperscape-api": "^0.0.1",
+    "@mattplays/minecraft-api": "^0.0.1",
+    "@mattplays/overwatch-api": "^0.0.1",
     "node-fetch": "^2.6.1"
   },
   "scripts": {
