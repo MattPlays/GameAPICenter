@@ -452,60 +452,66 @@ export type PUBGStats = {
     "meta": {}
 }
 export type PUBGWeaponMasteryStats = {
-    "accountId": string,
-    "attributes": {
-      "platform": string,
-      "weaponSummaries": {
-        "$Item_Weapon": {
-          "XPTotal": number,
-          "LevelCurrent": number,
-          "TierCurrent": number,
-          "StatsTotal": {
-            "MostDefeatsInAGame": number,
-            "Defeats": number,
-            "MostDamagePlayerInAGame": number,
-            "DamagePlayer": number,
-            "MostHeadShotsInAGame": number,
-            "HeadShots": number,
-            "LongestDefeat": number,
-            "LongRangeDefeats": number,
-            "Kills": number,
-            "MostKillsInAGame": number,
-            "Groggies": number,
-            "MostGroggiesInAGame": number
-          },
-          "Medals": [
-            {
-              "MedalId": string,
-              "Count": number
-            }
-          ]
-        }
+    "data": {
+      "type": string,
+      "id": string,
+      "attributes": {
+        "latestMatchId": string
+        "platform": string,
+        "seasonId": string,
+        "weaponSummaries": {
+          "$Item_Weapon": {
+            "XPTotal": number,
+            "LevelCurrent": number,
+            "TierCurrent": number,
+            "StatsTotal": {
+              "MostDefeatsInAGame": number,
+              "Defeats": number,
+              "MostDamagePlayerInAGame": number,
+              "DamagePlayer": number,
+              "MostHeadShotsInAGame": number,
+              "HeadShots": number,
+              "LongestDefeat": number,
+              "LongRangeDefeats": number,
+              "Kills": number,
+              "MostKillsInAGame": number,
+              "Groggies": number,
+              "MostGroggiesInAGame": number
+            },
+            "Medals": [
+              {
+                "MedalId": string,
+                "Count": number
+              }
+            ]
+          }
+        },
       },
-      "latestMatchId": string
-    },
+    }
     "links": {
       "self": string
     },
     "meta": {}
 }
 export type PUBGSurvivalMasteryStats = {
-    "type": string,
-    "id": string,
-    "attributes": {
-      "xp": number,
-      "level": number,
-      "totalMatchesPlayed": number,
-      "latestMatchId": string,
-      "stats": [
-        {
-          "statid": string,
-          "total": number,
-          "average": number,
-          "careerBest": number,
-          "lastMatchValue": number
-        }
-      ]
+    "data": {
+      "type": string,
+      "id": string,
+      "attributes": {
+        "xp": number,
+        "level": number,
+        "totalMatchesPlayed": number,
+        "latestMatchId": string,
+        "stats": [
+          {
+            "statid": string,
+            "total": number,
+            "average": number,
+            "careerBest": number,
+            "lastMatchValue": number
+          }
+        ]
+      },
     },
     "links": {
       "self": string
@@ -555,9 +561,7 @@ export type PUBGMatchStats = {
         "self": string
       }
     },
-    "included": [
-      null
-    ],
+    "included": [],
     "links": {
       "self": string
     },
