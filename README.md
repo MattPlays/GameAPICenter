@@ -7,9 +7,9 @@ npm install gameapicenter
 ```
 
 # Table of Contents
-1. [Apex Legends](https://github.com/MattPlays/ApexLegends-API#readme)
-2. [Bloons TD 6](https://github.com/MattPlays/BloonsTD6-API#readme)
-3. [Counter Strike Global Offensive](https://github.com/MattPlays/CSGOAPI#readme)
-4. [Hyper Scape](https://github.com/MattPlays/HyperScape-API#readme)
-5. [Minecraft](https://github.com/MattPlays/MinecraftAPI#readme)
-6. [Overwatch](https://github.com/MattPlays/OverwatchAPI#readme)
+1. [Apex Legends](https://www.npmjs.com/package/%40mattplays%2Fapexlegends-api)
+2. [Bloons TD 6](https://www.npmjs.com/package/%40mattplays%2Fbloonstd6-api)
+3. [Counter Strike Global Offensive](https://www.npmjs.com/package/%40mattplays%2Fcsgo-api)
+4. [Hyper Scape](https://www.npmjs.com/package/%40mattplays%2Fhyperscape-api)
+5. [Minecraft](https://www.npmjs.com/package/%40mattplays%2Fminecraft-api)
+6. [Overwatch](https://www.npmjs.com/package/%40mattplays%2Foverwatch-api)
